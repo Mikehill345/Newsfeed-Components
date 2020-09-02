@@ -93,6 +93,7 @@ const data = [
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
+  
 
   <div class="article">
     <h2>{title of the article}</h2>
@@ -114,3 +115,73 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+
+const newArticle = {
+  title: 'Look im a new article',
+  date: 'Sept 8th, 2020',
+  firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+        hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+        Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+  secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+        hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+        hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+        hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+  thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+        Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+        Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`,
+}
+
+data.push(newArticle)
+
+const articles = document.querySelector('.articles')
+
+
+function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagraph}){
+
+
+  const article = document.createElement('div')
+  const titleLine = document.createElement('h2')
+  const dateContent = document.createElement('p')
+  const paragraphOne = document.createElement('p')
+  const paragraphTwo = document.createElement('p')
+  const paragraphThree = document.createElement('p')
+  const button = document.createElement('span')
+  
+  article.appendChild(titleLine)
+  article.appendChild(dateContent)
+  article.appendChild(paragraphOne)
+  article.appendChild(paragraphTwo)
+  article.appendChild(paragraphThree)
+  article.appendChild(button)
+
+article.classList.add('article')
+dateContent.classList.add('date')
+button.classList.add('expandButton')
+
+
+titleLine.textContent = title
+dateContent.textContent = date
+paragraphOne.textContent = firstParagraph
+paragraphTwo.textContent = secondParagraph
+paragraphThree.textContent = thirdParagraph
+button.textContent = '+'
+button.style.fontSize = '2rem'
+
+button.addEventListener('click', event =>{
+   article.classList.toggle('article-open')
+
+})
+return article
+}
+
+data.forEach(articleObj => {
+  articles.appendChild(articleMaker(articleObj))
+})
+
+
+
+
+
